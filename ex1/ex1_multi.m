@@ -51,9 +51,6 @@ fprintf('Normalizing Features ...\n');
 
 [X mu sigma] = featureNormalize(X);
 
-% fprintf('mu = %.0f, sigma = %.0f \n', [mu sigma]');
-% fprintf(' x = [%.0f %.0f], y = %.0f \n', [X(1:10,:) y(1:10,:)]');
-
 % Add intercept term to X
 X = [ones(m, 1) X];
 
@@ -85,8 +82,8 @@ X = [ones(m, 1) X];
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
-alpha = 0.01;
-num_iters = 400;
+alpha = 0.3;
+num_iters = 50;
 
 % Init Theta and Run Gradient Descent
 theta = zeros(3, 1);
@@ -107,7 +104,13 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
-price = 0; % You should change this
+
+% Normalize the question features
+qxOne = (1650 - mu(1)) / sigma(1);
+qxTwo = (3 - mu(2)) / sigma(2);
+Q = [1 qxOne qxTwo];
+
+price = Q * theta;
 
 
 % ============================================================
@@ -152,7 +155,9 @@ fprintf('\n');
 
 % Estimate the price of a 1650 sq-ft, 3 br house
 % ====================== YOUR CODE HERE ======================
-price = 0; % You should change this
+
+Q2 = [1 1650 3];
+price = Q2 * theta;
 
 
 % ============================================================
