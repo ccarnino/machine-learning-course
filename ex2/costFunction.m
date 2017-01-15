@@ -27,8 +27,7 @@ prediction = sigmoid(X * theta);
 J = (1 / m) * (-y' * log(prediction) - (1 - y)' * log(1 - prediction));
 
 % Calculate the gradient
-alpha = 0.1;
-grad = theta - (alpha / m) * X' * (prediction - y);
+grad = (1 / m) * X' * (prediction - y);
 
 % =============================================================
 
