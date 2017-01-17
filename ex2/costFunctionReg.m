@@ -34,16 +34,15 @@ grad = zeros(size(theta));
 % Correct solution copied from
 % https://github.com/schneems/Octave/blob/master/mlclass-ex2/mlclass-ex2/costFunctionReg.m
 prediction = sigmoid(X * theta);
-shiftTheta = theta(2 : size(theta));
-thetaReg = [0; shiftTheta];
+thetaRegularized = [0; theta(2:end)];
 
 % J = (1/m)*sum(-y .* log(prediction) - (1 - y) .* log(1-prediction));
-J = (1 / m) * (-y' * log(prediction) - (1 - y)' * log(1 - prediction)) + (lambda / (2 * m)) * thetaReg' * thetaReg;
+J = (1 / m) * (-y' * log(prediction) - (1 - y)' * log(1 - prediction)) + (lambda / (2 * m)) * thetaRegularized' * thetaRegularized;
 
 % grad_zero = (1/m)*X(:,1)'*(prediction-y);
 % grad_rest = (1/m)*(shift_x'*(prediction - y)+lambda*shiftTheta);
 % grad      = cat(1, grad_zero, grad_rest);
-grad = (1 / m) * (X' * (prediction - y) + lambda * thetaReg);
+grad = (1 / m) * (X' * (prediction - y) + lambda * thetaRegularized);
 
 % =============================================================
 
