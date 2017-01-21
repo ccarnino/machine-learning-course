@@ -52,4 +52,6 @@ grad = (1 / m) * (X' * (prediction - y) + lambda * thetaRegularized);
 
 % =============================================================
 
+grad = grad(:);
+
 end
