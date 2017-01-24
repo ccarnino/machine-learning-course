@@ -68,7 +68,7 @@ predictions = sigmoid(predict(Theta1, Theta2, X));
 
 for indexXi = 1 : m
     % Create a vector with one in the class index
-    yiVector = zeros(1, num_labels);
+    yi = zeros(1, num_labels);
     label = y(indexXi);
     yi(1, label) = 1;
 
