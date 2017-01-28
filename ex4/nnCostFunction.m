@@ -75,6 +75,14 @@ a3 = sigmoid(z3);
 % Calculate the cost function (without regularization)
 J = (1 / m) * sum(sum(-yMatrix .* log(a3) - (1 - yMatrix) .* log(1 - a3)));
 
+% Calculate the regularization term
+partialSquaredTheta1 = Theta1(:, 2:end) .^ 2;
+partialSquaredTheta2 = Theta2(:, 2:end) .^ 2;
+regularizationTerm = (lambda / (2 * m)) * (sum(sum(partialSquaredTheta1)) + sum(sum(partialSquaredTheta2)));
+
+% Update the cost function adding the regularization term
+J = J + regularizationTerm;
+
 % =========================================================================
 
 % Unroll gradients
