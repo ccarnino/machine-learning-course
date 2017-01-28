@@ -83,6 +83,22 @@ regularizationTerm = (lambda / (2 * m)) * (sum(sum(partialSquaredTheta1)) + sum(
 % Update the cost function adding the regularization term
 J = J + regularizationTerm;
 
+
+% Backpropagation
+sigma3 = a3 - yMatrix;
+z2PlusBias = [ones(size(z2, 1), 1) z2];
+sigma2 = sigma3 * Theta2 .* sigmoidGradient(z2PlusBias);
+sigma2 = sigma2(:, 2:end); % Remove bias
+
+delta1 = sigma2' * a1;
+delta2 = sigma3' * a2;
+
+% Calculate the accumulated theta gradient
+regularizationTheta1 = [zeros(size(Theta1, 1), 1) Theta1(:, 2:end)];
+regularizationTheta2 = [zeros(size(Theta2, 1), 1) Theta2(:, 2:end)];
+Theta1_grad = (delta1 / m) + (lambda / m) * regularizationTheta1;
+Theta2_grad = (delta2 / m) + (lambda / m) * regularizationTheta2;
+
 % =========================================================================
 
 % Unroll gradients
