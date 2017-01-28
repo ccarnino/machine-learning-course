@@ -62,26 +62,18 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% Transform the y vector into a matrix with 1s in the column of the associated label
+yMatrix = eye(num_labels)(y, :);
 
-errors = zeros(m, num_labels);
-predictions = sigmoid(predict(Theta1, Theta2, X));
+% Calculate the activation units of all the layers
+a1 = [ones(m, 1) X];
+z2 = a1 * Theta1';
+a2 = [ones(size(z2, 1), 1) sigmoid(z2)];
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
 
-for indexXi = 1 : m
-    % Create a vector with one in the class index
-    yi = zeros(1, num_labels);
-    label = y(indexXi);
-    yi(1, label) = 1;
-
-    % Calculate the sum of the labels' errors
-    ithPredictions = predictions(indexXi);
-    errors(indexXi, :) = sum(-yi * log(ithPredictions) - (1 - yi) * log(1 - ithPredictions));
-endfor
-
-% Calculate the cost
-J = (1 / m) * sum(errors);
-
-
-% -------------------------------------------------------------
+% Calculate the cost function (without regularization)
+J = (1 / m) * sum(sum(-yMatrix .* log(a3) - (1 - yMatrix) .* log(1 - a3)));
 
 % =========================================================================
 
