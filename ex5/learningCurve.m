@@ -51,7 +51,6 @@ error_val   = zeros(m, 1);
 %       end
 %
 
-
 % Test on different training set size
 for indexSize = 1 : m
 
@@ -63,12 +62,12 @@ for indexSize = 1 : m
     thetaTrain = trainLinearReg(XTrain, yTrain, lambda);
 
     % Get the error on the training set
-    [jTrain, gradTrain] = linearRegCostFunction(XTrain, yTrain, thetaTrain, 0);
-    error_train(indexSize) = jTrain;
+    [JTrain, gradTrain] = linearRegCostFunction(XTrain, yTrain, thetaTrain, 0);
+    error_train(indexSize) = JTrain;
 
     % Get the error on the cross validation set
-    [jVal, gradVal] = linearRegCostFunction(Xval, yval, thetaTrain, 0);
-    error_val(indexSize) = jVal;
+    [JVal, gradVal] = linearRegCostFunction(Xval, yval, thetaTrain, 0);
+    error_val(indexSize) = JVal;
 
 endfor
 
