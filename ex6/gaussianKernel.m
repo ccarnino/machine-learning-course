@@ -16,11 +16,10 @@ sim = 0;
 %
 %
 
-
-
-
-
+distance = sum((x1 - x2) .^ 2);
+dividend = 2 * (sigma ^ 2);
+sim = exp( - (distance / dividend));
 
 % =============================================================
-    
+
 end
