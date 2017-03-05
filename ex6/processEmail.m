@@ -97,7 +97,16 @@ while ~isempty(email_contents)
     %       str2). It will return 1 only if the two strings are equivalent.
     %
 
-    
+    % Look for the word in the vocabulary
+    indexVocab = -1;
+    for indexVocabList = 1 : length(vocabList)
+
+        % If it finds the vocabulary save its index, then stop looking
+        if (strcmp(str, vocabList(indexVocabList)) == 1)
+            word_indices = [word_indices; indexVocabList];
+            break;
+        end
+    endfor
 
 
     % =============================================================
